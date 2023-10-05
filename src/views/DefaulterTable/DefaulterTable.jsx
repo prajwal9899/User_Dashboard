@@ -15,7 +15,6 @@ import { useSelector } from 'react-redux';
 import { Box, Modal, TableFooter, TablePagination } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import GaugeChart from 'react-gauge-chart';
-import cryptoRandomString from 'crypto-random-string';
 import domToPdf from 'dom-to-pdf';
 
 const style = {
@@ -39,7 +38,6 @@ const chartStyle = {
 const DefaulterTable = ({ searchInput, count }) => {
   const navigate = useNavigate();
   const printRef = useRef(null);
-  // const uuid = cryptoRandomString({ length: 20 });
   const uuid = 'Set new UUID';
   const [defaultersData, setDefaultersData] = useState([]);
   const [defaulters, setDefaulters] = useState([]);
