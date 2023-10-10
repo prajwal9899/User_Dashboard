@@ -16,6 +16,11 @@ import MonetizationOnTwoTone from '@mui/icons-material/MonetizationOnTwoTone';
 import DescriptionTwoTone from '@mui/icons-material/DescriptionTwoTone';
 import ThumbUpAltTwoTone from '@mui/icons-material/ThumbUpAltTwoTone';
 import CalendarTodayTwoTone from '@mui/icons-material/CalendarTodayTwoTone';
+import AccountBalanceTwoToneIcon from '@mui/icons-material/AccountBalanceTwoTone';
+import ShieldTwoToneIcon from '@mui/icons-material/ShieldTwoTone';
+import GppMaybeTwoToneIcon from '@mui/icons-material/GppMaybeTwoTone';
+import AccountBalanceWalletTwoToneIcon from '@mui/icons-material/AccountBalanceWalletTwoTone';
+import PersonRemoveTwoToneIcon from '@mui/icons-material/PersonRemoveTwoTone';
 
 
 const Default = () => {
@@ -25,43 +30,33 @@ const Default = () => {
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
         <Grid container spacing={gridSpacing}>
-          <Grid item lg={3} sm={6} xs={12}>
+          <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="$30200"
-              secondary="All Earnings"
-              color={theme.palette.warning.main}
+              primary="&#x20B9;30200"
+              secondary="Total Loan Amount"
+              color={theme.palette.success.main}
               footerData="10% changes on profit"
               iconPrimary={MonetizationOnTwoTone}
             // iconFooter={TrendingUpIcon}
             />
           </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
+          <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="145"
-              secondary="Task"
+              primary="&#x20B9;44145"
+              secondary="Outstanding Balance"
               color={theme.palette.error.main}
               footerData="28% task performance"
-              iconPrimary={CalendarTodayTwoTone}
+              iconPrimary={AccountBalanceWalletTwoToneIcon}
             // iconFooter={TrendingDownIcon}
             />
           </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
+          <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="290+"
-              secondary="Page Views"
+              primary="&#x20B9;290545"
+              secondary="Secured Amount"
               color={theme.palette.success.main}
               footerData="10k daily views"
-              iconPrimary={DescriptionTwoTone}
-            // iconFooter={TrendingUpIcon}
-            />
-          </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
-            <ReportCard
-              primary="500"
-              secondary="Downloads"
-              color={theme.palette.primary.main}
-              footerData="1k download in App store"
-              iconPrimary={ThumbUpAltTwoTone}
+              iconPrimary={ShieldTwoToneIcon}
             // iconFooter={TrendingUpIcon}
             />
           </Grid>
@@ -69,44 +64,34 @@ const Default = () => {
       </Grid>
       <Grid item xs={12}>
         <Grid container spacing={gridSpacing}>
-          <Grid item lg={3} sm={6} xs={12}>
+          <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="$30200"
-              secondary="All Earnings"
+              primary="&#x20B9;290881"
+              secondary="Non-Secured Amount"
+              color={theme.palette.warning.main}
+              footerData="10k daily views"
+              iconPrimary={GppMaybeTwoToneIcon}
+            // iconFooter={TrendingUpIcon}
+            />
+          </Grid>
+          <Grid item lg={4} sm={6} xs={12}>
+            <ReportCard
+              primary="30200"
+              secondary="Total No. of Accounts"
               color={theme.palette.warning.main}
               footerData="10% changes on profit"
-              iconPrimary={MonetizationOnTwoTone}
+              iconPrimary={AccountBalanceTwoToneIcon}
             // iconFooter={TrendingUpIcon}
             />
           </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
+          <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
               primary="145"
-              secondary="Task"
+              secondary="Total No. of Defaulters"
               color={theme.palette.error.main}
               footerData="28% task performance"
-              iconPrimary={CalendarTodayTwoTone}
+              iconPrimary={PersonRemoveTwoToneIcon}
             // iconFooter={TrendingDownIcon}
-            />
-          </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
-            <ReportCard
-              primary="290+"
-              secondary="Page Views"
-              color={theme.palette.success.main}
-              footerData="10k daily views"
-              iconPrimary={DescriptionTwoTone}
-            // iconFooter={TrendingUpIcon}
-            />
-          </Grid>
-          <Grid item lg={3} sm={6} xs={12}>
-            <ReportCard
-              primary="500"
-              secondary="Downloads"
-              color={theme.palette.primary.main}
-              footerData="1k download in App store"
-              iconPrimary={ThumbUpAltTwoTone}
-            // iconFooter={TrendingUpIcon}
             />
           </Grid>
         </Grid>
@@ -125,7 +110,7 @@ const Default = () => {
               <CardHeader
                 title={
                   <Typography component="div" className="card-header">
-                    Traffic Sources
+                    Resources Analytics
                   </Typography>
                 }
               />
@@ -135,7 +120,7 @@ const Default = () => {
                   <Grid item xs={12}>
                     <Grid container alignItems="center" spacing={1}>
                       <Grid item sm zeroMinWidth>
-                        <Typography variant="body2">Direct</Typography>
+                        <Typography variant="body2">Defaulters</Typography>
                       </Grid>
                       <Grid item>
                         <Typography variant="body2" align="right">
@@ -150,7 +135,7 @@ const Default = () => {
                   <Grid item xs={12}>
                     <Grid container alignItems="center" spacing={1}>
                       <Grid item sm zeroMinWidth>
-                        <Typography variant="body2">Social</Typography>
+                        <Typography variant="body2">Secured Amount</Typography>
                       </Grid>
                       <Grid item>
                         <Typography variant="body2" align="right">
@@ -165,7 +150,7 @@ const Default = () => {
                   <Grid item xs={12}>
                     <Grid container alignItems="center" spacing={1}>
                       <Grid item sm zeroMinWidth>
-                        <Typography variant="body2">Referral</Typography>
+                        <Typography variant="body2">Non-Secured Amount</Typography>
                       </Grid>
                       <Grid item>
                         <Typography variant="body2" align="right">
@@ -180,7 +165,7 @@ const Default = () => {
                   <Grid item xs={12}>
                     <Grid container alignItems="center" spacing={1}>
                       <Grid item sm zeroMinWidth>
-                        <Typography variant="body2">Bounce</Typography>
+                        <Typography variant="body2">Outstanding Balance</Typography>
                       </Grid>
                       <Grid item>
                         <Typography variant="body2" align="right">
@@ -192,7 +177,7 @@ const Default = () => {
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item xs={12}>
+                  <Grid item xs={12} style={{visibility:"hidden"}}>
                     <Grid container alignItems="center" spacing={1}>
                       <Grid item sm zeroMinWidth>
                         <Typography variant="body2">Internet</Typography>
