@@ -26,7 +26,8 @@ const Header = ({ drawerToggle }) => {
           <Box sx={{ display: { xs: 'none', md: 'block' } }}>
             <Grid item>
               <Box mt={0.5}>
-                <img src={logo} alt="Logo" />
+                {/* <img src={logo} alt="Logo" /> */}
+                Society Portal
               </Box>
             </Grid>
           </Box>

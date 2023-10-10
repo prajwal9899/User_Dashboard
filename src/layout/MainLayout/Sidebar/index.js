@@ -46,7 +46,7 @@ const Sidebar = ({ drawerOpen, drawerToggle, window }) => {
           }}
         >
           <Grid item>
-            <img src={logo} alt="Logo" />
+            {/* <img src={logo} alt="Logo" /> */}
           </Grid>
         </Grid>
       </Box>
