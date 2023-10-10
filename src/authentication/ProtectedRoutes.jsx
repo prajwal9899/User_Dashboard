@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
@@ -10,7 +9,6 @@ const ProtectedRoutes = ({ children }) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   const getUser = async () => {
     try {
       const res = await axios.post(

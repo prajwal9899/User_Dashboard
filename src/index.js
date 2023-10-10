@@ -15,7 +15,6 @@ import App from 'layout/App';
 import reducer from 'redux/features/reducer';
 
 const store = configureStore({ reducer });
-
 const root = createRoot(document.getElementById('root'));
 
 root.render(
