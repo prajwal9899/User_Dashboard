@@ -26,13 +26,15 @@ import PersonRemoveTwoToneIcon from '@mui/icons-material/PersonRemoveTwoTone';
 const Default = () => {
   const theme = useTheme();
   const { user } = useSelector((state) => state.user);
+  const {LoanAmount,LoanOutstandingBalance,NoOfAccounts} = useSelector((state) => state);
+  const {analytics} = useSelector((state) => state);
   return (
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
         <Grid container spacing={gridSpacing}>
           <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="&#x20B9;30200"
+              primary={`₹${analytics.LoanAmount}`}
               secondary="Total Loan Amount"
               color={theme.palette.success.main}
               footerData="10% changes on profit"
@@ -42,7 +44,7 @@ const Default = () => {
           </Grid>
           <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="&#x20B9;44145"
+              primary={`₹${analytics.LoanOutstandingBalance}`}
               secondary="Outstanding Balance"
               color={theme.palette.error.main}
               footerData="28% task performance"
@@ -52,7 +54,7 @@ const Default = () => {
           </Grid>
           <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="&#x20B9;290545"
+              primary="₹290545"
               secondary="Secured Amount"
               color={theme.palette.success.main}
               footerData="10k daily views"
@@ -66,7 +68,7 @@ const Default = () => {
         <Grid container spacing={gridSpacing}>
           <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="&#x20B9;290881"
+              primary="₹290881"
               secondary="Non-Secured Amount"
               color={theme.palette.warning.main}
               footerData="10k daily views"
@@ -76,7 +78,7 @@ const Default = () => {
           </Grid>
           <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="30200"
+              primary={analytics.NoOfAccounts}
               secondary="Total No. of Accounts"
               color={theme.palette.warning.main}
               footerData="10% changes on profit"

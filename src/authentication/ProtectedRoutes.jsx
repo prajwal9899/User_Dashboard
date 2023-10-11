@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { hideLoading, showLoading } from '../redux/features/alertSlice';
 import axios from 'axios';
 import { setUser } from '../redux/features/userSlice';
+import { LoanAmount, LoanOutstandingBalance, NoOfAccounts } from '../redux/features/analyticsSlice';
 
 const ProtectedRoutes = ({ children }) => {
   const dispatch = useDispatch();
@@ -32,6 +33,35 @@ const ProtectedRoutes = ({ children }) => {
       console.log(error);
     }
   };
+
+  useEffect(() => {
+    if (user !== null) {
+      axios
+        .get(`${process.env.REACT_APP_URL}/get-defaulters`, {
+          params: {
+            Registration_No: user.registrationNo
+          }
+        })
+        .then((data) => {
+          var defaulters = [];
+          var item = data.data;
+          var noOfAccounts = item.length
+          var loanAmount = 0
+          var loanOutstandingBalance = 0
+          // console.log(item, "defaulters");
+          for (let i = 0; i < item.length; i++) {
+            loanAmount = Number(item[i].LoanAmount) + Number(loanAmount)
+            loanOutstandingBalance = Number(item[i].LoanOutstandingBalance) + Number(loanOutstandingBalance)
+          }
+          dispatch(LoanAmount(loanAmount))
+          dispatch(LoanOutstandingBalance(loanOutstandingBalance))
+          dispatch(NoOfAccounts(noOfAccounts))
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [user]);
 
   useEffect(() => {
     if (!user) {

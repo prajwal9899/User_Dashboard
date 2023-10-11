@@ -14,7 +14,6 @@ import { drawerWidth } from 'config.js';
 import MenuTwoToneIcon from '@mui/icons-material/MenuTwoTone';
 import logo from 'assets/images/logo.svg';
 
-// ==============================|| HEADER ||============================== //
 
 const Header = ({ drawerToggle }) => {
   const theme = useTheme();
