@@ -21,10 +21,12 @@ import { ToastContainer, toast } from 'react-toastify';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import Google from 'assets/images/social-google.svg';
+import { LoadingButton } from '@mui/lab';
 
 const FirebaseLogin = ({ ...rest }) => {
   const theme = useTheme();
   const [showPassword, setShowPassword] = React.useState(false);
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const navigate = useNavigate();
   const [user, setUser] = useState({
     email: '',
@@ -36,6 +38,7 @@ const FirebaseLogin = ({ ...rest }) => {
 
   const submitForm = (e) => {
     e.preventDefault();
+    setIsSubmitting(true)
     const newUserdetails = {
       email: user.email,
       password: user.password,
@@ -45,6 +48,7 @@ const FirebaseLogin = ({ ...rest }) => {
       .post(`${process.env.REACT_APP_URL}/login`, newUserdetails)
       .then((res) => {
         if (res.data.status === 'failed') {
+        setIsSubmitting(false)
           toast.error(`${res.data.message}`, {
             position: 'top-right',
             autoClose: 5000,
@@ -64,10 +68,14 @@ const FirebaseLogin = ({ ...rest }) => {
           });
           localStorage.setItem('token', res.data.token);
           navigate('/');
+          setIsSubmitting(false)
+
         }
       })
       .catch((err) => {
         console.log(err);
+        setIsSubmitting(false)
+
       });
   };
 
@@ -192,9 +200,9 @@ const FirebaseLogin = ({ ...rest }) => {
               </Grid>
             </Grid> */}
         <Box mt={2}>
-          <Button
+          <LoadingButton
             color="primary"
-            // disabled={isSubmitting}
+            loading={isSubmitting}
             fullWidth
             size="large"
             type="submit"
@@ -202,7 +210,7 @@ const FirebaseLogin = ({ ...rest }) => {
             onClick={submitForm}
           >
             Log In
-          </Button>
+          </LoadingButton>
         </Box>
       </form>
     </>

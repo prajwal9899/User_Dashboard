@@ -22,7 +22,6 @@ const ProtectedRoutes = ({ children }) => {
         }
       );
       console.log(res, 'Protected');
-
       if (res.data.success === true) {
         dispatch(setUser(res.data.data));
       } else {

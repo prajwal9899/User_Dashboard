@@ -46,7 +46,8 @@ const ReportCard = ({ primary, secondary, iconPrimary, color, footerData, iconFo
           }}
         >
           <Grid item>
-            <Typography variant="body2">{footerData}</Typography>
+            {/* <Typography style={{visibility:"hidden"}} variant="body2">{footerData}</Typography> */}
+            <Typography style={{visibility:""}} variant="body2">{footerData}</Typography>
           </Grid>
           <Grid item>
             <Typography variant="body2">{footerIcon}</Typography>

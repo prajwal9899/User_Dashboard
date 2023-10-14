@@ -11,11 +11,12 @@ import './DefaulterTable.scss';
 import { MDBBtn } from 'mdb-react-ui-kit';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { Box, Modal, TableFooter, TablePagination } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import GaugeChart from 'react-gauge-chart';
 import domToPdf from 'dom-to-pdf';
+import { NoOfDefaulters } from 'redux/features/analyticsSlice';
 
 const style = {
   position: 'absolute',
@@ -46,6 +47,8 @@ const DefaulterTable = ({ searchInput, count }) => {
   const [modalData, setModalData] = useState({});
   const [isNPA, setIsNPA] = useState('NA');
   const { user } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
 
   useEffect(() => {
     if (user !== null) {
@@ -57,8 +60,8 @@ const DefaulterTable = ({ searchInput, count }) => {
         })
         .then((data) => {
           var defaulters = [];
+          var defaultersCount = 0
           let item = data.data;
-
           for (let index = 0; index < item.length; index++) {
             var NPA = '';
             let Installment = item[index].OverdueNoofInstallment;
@@ -74,6 +77,10 @@ const DefaulterTable = ({ searchInput, count }) => {
               NPA = 'DoubtFul C';
             } else {
               NPA = 'Loss Asset';
+            }
+
+            if(item[index].OverdueNoofInstallment >= 3 && NPA !== 'Standard Assets'){
+              defaultersCount = defaultersCount +1
             }
 
             let newData = {
@@ -105,7 +112,7 @@ const DefaulterTable = ({ searchInput, count }) => {
             };
             defaulters.push(newData);
           }
-          // setDefaultersData(defaulters)
+          dispatch(NoOfDefaulters(defaultersCount))
           setData(defaulters);
         })
         .catch((err) => {

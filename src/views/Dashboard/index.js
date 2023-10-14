@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 
 // material-ui
 import { useTheme, styled } from '@mui/material/styles';
@@ -21,13 +21,57 @@ import ShieldTwoToneIcon from '@mui/icons-material/ShieldTwoTone';
 import GppMaybeTwoToneIcon from '@mui/icons-material/GppMaybeTwoTone';
 import AccountBalanceWalletTwoToneIcon from '@mui/icons-material/AccountBalanceWalletTwoTone';
 import PersonRemoveTwoToneIcon from '@mui/icons-material/PersonRemoveTwoTone';
+import axios from 'axios';
 
 
 const Default = () => {
   const theme = useTheme();
   const { user } = useSelector((state) => state.user);
-  const {LoanAmount,LoanOutstandingBalance,NoOfAccounts} = useSelector((state) => state);
-  const {analytics} = useSelector((state) => state);
+  const { LoanAmount, LoanOutstandingBalance, NoOfAccounts } = useSelector((state) => state);
+  const { analytics } = useSelector((state) => state);
+   const [noOfDefaulters, setNoOfDefaulters] = useState(0)
+  // console.log((analytics.NoOfDefaulters/analytics.NoOfAccounts)*100);
+  useEffect(() => {
+    if (user !== null) {
+      axios
+        .get(`${process.env.REACT_APP_URL}/get-defaulters`, {
+          params: {
+            Registration_No: user.registrationNo
+          }
+        })
+        .then((data) => {
+          var defaultersCount = 0
+          let item = data.data;
+          for (let index = 0; index < item.length; index++) {
+            var NPA = '';
+            let Installment = item[index].OverdueNoofInstallment;
+            if (Installment < 3) {
+              NPA = 'Standard Assets';
+            } else if (Installment > 3 && Installment < 12) {
+              NPA = 'Sub Standard';
+            } else if (Installment > 12 && Installment <= 24) {
+              NPA = 'DoubtFul A';
+            } else if (Installment > 24 && Installment <= 36) {
+              NPA = 'DoubtFul B';
+            } else if (Installment > 36 && Installment <= 60) {
+              NPA = 'DoubtFul C';
+            } else {
+              NPA = 'Loss Asset';
+            }
+            if(item[index].OverdueNoofInstallment >= 3 && NPA !== 'Standard Assets'){
+              defaultersCount = defaultersCount +1
+            }
+          }
+
+          setNoOfDefaulters(defaultersCount)
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }, [user]);
+
+
   return (
     <Grid container spacing={gridSpacing}>
       <Grid item xs={12}>
@@ -37,7 +81,7 @@ const Default = () => {
               primary={`₹${analytics.LoanAmount}`}
               secondary="Total Loan Amount"
               color={theme.palette.success.main}
-              footerData="10% changes on profit"
+              // footerData="10% changes on profit"
               iconPrimary={MonetizationOnTwoTone}
             // iconFooter={TrendingUpIcon}
             />
@@ -47,7 +91,7 @@ const Default = () => {
               primary={`₹${analytics.LoanOutstandingBalance}`}
               secondary="Outstanding Balance"
               color={theme.palette.error.main}
-              footerData="28% task performance"
+              // footerData="28% task performance"
               iconPrimary={AccountBalanceWalletTwoToneIcon}
             // iconFooter={TrendingDownIcon}
             />
@@ -57,7 +101,7 @@ const Default = () => {
               primary="₹290545"
               secondary="Secured Amount"
               color={theme.palette.success.main}
-              footerData="10k daily views"
+              // footerData="10k daily views"
               iconPrimary={ShieldTwoToneIcon}
             // iconFooter={TrendingUpIcon}
             />
@@ -71,27 +115,27 @@ const Default = () => {
               primary="₹290881"
               secondary="Non-Secured Amount"
               color={theme.palette.warning.main}
-              footerData="10k daily views"
+              // footerData="10k daily views"
               iconPrimary={GppMaybeTwoToneIcon}
             // iconFooter={TrendingUpIcon}
             />
           </Grid>
           <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary={analytics.NoOfAccounts}
+              primary={`${analytics.NoOfAccounts}`}
               secondary="Total No. of Accounts"
               color={theme.palette.warning.main}
-              footerData="10% changes on profit"
+              // footerData="10% changes on profit"
               iconPrimary={AccountBalanceTwoToneIcon}
             // iconFooter={TrendingUpIcon}
             />
           </Grid>
           <Grid item lg={4} sm={6} xs={12}>
             <ReportCard
-              primary="145"
+              primary={`${noOfDefaulters}`}
               secondary="Total No. of Defaulters"
               color={theme.palette.error.main}
-              footerData="28% task performance"
+              // footerData="28% task performance"
               iconPrimary={PersonRemoveTwoToneIcon}
             // iconFooter={TrendingDownIcon}
             />
@@ -126,11 +170,11 @@ const Default = () => {
                       </Grid>
                       <Grid item>
                         <Typography variant="body2" align="right">
-                          80%
+                          {(Number(noOfDefaulters) / Number(analytics.NoOfAccounts)) * 100}%
                         </Typography>
                       </Grid>
                       <Grid item xs={12}>
-                        <LinearProgress variant="determinate" aria-label="direct" value={80} color="primary" />
+                        <LinearProgress variant="determinate" aria-label="direct" value={(Number(noOfDefaulters) / Number(analytics.NoOfAccounts)) * 100} color="primary" />
                       </Grid>
                     </Grid>
                   </Grid>
@@ -171,15 +215,15 @@ const Default = () => {
                       </Grid>
                       <Grid item>
                         <Typography variant="body2" align="right">
-                          60%
+                          {(Number(analytics.LoanOutstandingBalance)/Number(analytics.LoanAmount))*100}%
                         </Typography>
                       </Grid>
                       <Grid item xs={12}>
-                        <LinearProgress variant="determinate" aria-label="Bounce" value={60} color="secondary" />
+                        <LinearProgress variant="determinate" aria-label="Bounce" value={(Number(analytics.LoanOutstandingBalance)/Number(analytics.LoanAmount))*100} color="secondary" />
                       </Grid>
                     </Grid>
                   </Grid>
-                  <Grid item xs={12} style={{visibility:"hidden"}}>
+                  <Grid item xs={12} style={{ visibility: "hidden" }}>
                     <Grid container alignItems="center" spacing={1}>
                       <Grid item sm zeroMinWidth>
                         <Typography variant="body2">Internet</Typography>

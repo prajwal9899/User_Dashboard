@@ -46,6 +46,12 @@ const ProfileSection = () => {
     prevOpen.current = open;
   }, [open]);
 
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    window.location.reload();
+  };
+
   return (
     <>
       <Button
@@ -123,7 +129,7 @@ const ProfileSection = () => {
                     <ListItemIcon>
                       <MeetingRoomTwoToneIcon />
                     </ListItemIcon>
-                    <ListItemText primary="Logout" />
+                    <ListItemText primary="Logout" onClick={handleLogout}/>
                   </ListItemButton>
                 </List>
               </ClickAwayListener>

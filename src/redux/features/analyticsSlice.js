@@ -5,7 +5,8 @@ export const analyticsSlice = createSlice({
   initialState: {
     NoOfAccounts: 0,
     LoanAmount: 0,
-    LoanOutstandingBalance: 0
+    LoanOutstandingBalance: 0,
+    NoOfDefaulters : 0
   },
   reducers: {
     NoOfAccounts: (state, action) => {
@@ -16,9 +17,12 @@ export const analyticsSlice = createSlice({
     },
     LoanOutstandingBalance: (state, action) => {
       state.LoanOutstandingBalance = action.payload;
+    },
+    NoOfDefaulters: (state, action) => {
+      state.LoanOutstandingBalance = action.payload;
     }
   }
 });
 
-export const { NoOfAccounts, LoanOutstandingBalance, LoanAmount } = analyticsSlice.actions;
+export const { NoOfAccounts, LoanOutstandingBalance, LoanAmount,NoOfDefaulters } = analyticsSlice.actions;
 

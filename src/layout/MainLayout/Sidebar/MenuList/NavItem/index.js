@@ -20,6 +20,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 const NavItem = ({ item, level }) => {
   const theme = useTheme();
   const customization = useSelector((state) => state.customization);
+  const { user } = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const Icon = item.icon;
   const itemIcon = item.icon ? <Icon color="inherit" /> : <ArrowForwardIcon color="inherit" fontSize={level > 0 ? 'inherit' : 'default'} />;
@@ -33,9 +34,14 @@ const NavItem = ({ item, level }) => {
     listItemProps = { component: 'a', href: item.url };
   }
 
+  console.log(user);
+  console.log(item);
+
+
+
   return (
     <ListItemButton
-      disabled={item.disabled}
+      disabled={user?.isSubscription !== "Activated" && item?.id !== "dashboard" ? true : false}
       sx={{
         ...(level > 1 && { backgroundColor: 'transparent !important', py: 1, borderRadius: '5px' }),
         borderRadius: '5px',
