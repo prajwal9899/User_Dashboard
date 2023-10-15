@@ -22,7 +22,6 @@ const UserTable = () => {
     axios
       .get(`${process.env.REACT_APP_URL}/admin/getUsers`)
       .then((data) => {
-        console.log(data, 'JAHUGAFD');
         setData(data.data);
       })
       .catch((err) => {
@@ -58,7 +57,6 @@ const UserTable = () => {
           </TableHead>
           <TableBody>
             {defaulters.map((item) => {
-              console.log(item);
               return (
                 <TableRow key={item._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                   <TableCell component="th" scope="row">

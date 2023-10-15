@@ -1,17 +1,21 @@
 /* eslint-disable eqeqeq */
-import React, { useState } from 'react';
-import './SearchDefaulters.scss';
-import { MDBRow, MDBCol, MDBInput, MDBBtn } from 'mdb-react-ui-kit';
-import DefaulterTable from 'views/DefaulterTable/DefaulterTable';
+import React, { useState } from "react";
+import "./SearchDefaulters.scss";
+import { MDBRow, MDBCol, MDBInput, MDBBtn } from "mdb-react-ui-kit";
+import DefaulterTable from "views/DefaulterTable/DefaulterTable";
 
 const SearchDefaulters = () => {
   const [filter, setFilter] = useState(false);
   const [count, setCount] = useState(0);
+  const [name, setName] = useState("");
+  const [aadhar, setAadhar] = useState("");
+  const [PAN, setPAN] = useState("");
+  const [mobile, setMobile] = useState("");
   const [inputValues, setInputValues] = useState({
-    name: '',
-    aadhar: '',
-    PAN: '',
-    mobile: ''
+    name: "",
+    aadhar: "",
+    PAN: "",
+    mobile: "",
   });
 
   const handleFilter = (e) => {
@@ -24,9 +28,41 @@ const SearchDefaulters = () => {
     setCount(count + 1);
   };
 
-  const handleInput = (e) => {
-    const { name, value } = e.target;
-    setInputValues({ ...inputValues, [name]: value });
+  // const handleInput = (e) => {
+  //   const { name, value } = e.target;
+  //   setInputValues({ ...inputValues, [name]: value });
+  // };
+
+  const handleName = (e) => {
+    const { value } = e.target;
+    setName(value);
+    setMobile("");
+    setAadhar("");
+    setPAN("");
+  };
+
+  const handleMobile = (e) => {
+    const { value } = e.target;
+    setMobile(value);
+    setName("");
+    setAadhar("");
+    setPAN("");
+  };
+
+  const handleAadhar = (e) => {
+    const { value } = e.target;
+    setAadhar(value);
+    setName("");
+    setName("");
+    setPAN("");
+  };
+
+  const handlePAN = (e) => {
+    const { value } = e.target;
+    setPAN(value);
+    setName("");
+    setAadhar("");
+    setName("");
   };
 
   return (
@@ -39,7 +75,15 @@ const SearchDefaulters = () => {
       <form>
         <MDBRow className="mb-4">
           <MDBCol lg={7}>
-            <MDBInput wrapperClass="mb-4" id="form6Example3" label="Customer name" name="name" onChange={(e) => handleInput(e)} />
+            <MDBInput
+              wrapperClass="mb-4"
+              id="form6Example3"
+              label="Customer name"
+              name="name"
+              // onChange={(e) => handleInput(e)}
+              value={name}
+              onChange={(e) => handleName(e)}
+            />
           </MDBCol>
           <MDBCol lg={2}>
             <MDBBtn onClick={handlSearch} className="mb-4">
@@ -65,23 +109,43 @@ const SearchDefaulters = () => {
                 <MDBInput
                   id="form6Example1"
                   label="Aadhar number"
-                  type={'number'}
+                  type={"number"}
                   maxLength={12}
                   name="aadhar"
-                  onChange={(e) => handleInput(e)}
+                  value={aadhar}
+                  onChange={(e) => handleAadhar(e)}
                 />
               </MDBCol>
               <MDBCol lg={4}>
-                <MDBInput id="form6Example2" label="PAN number" name="PAN" onChange={(e) => handleInput(e)} />
+                <MDBInput
+                  id="form6Example2"
+                  label="PAN number"
+                  name="PAN"
+                  value={PAN}
+                  onChange={(e) => handlePAN(e)}
+                />
               </MDBCol>
               <MDBCol lg={4}>
-                <MDBInput id="form6Example2" label="Mobile number" name="mobile" onChange={(e) => handleInput(e)} />
-              </MDBCol>{' '}
+                <MDBInput
+                  id="form6Example2"
+                  label="Mobile number"
+                  name="mobile"
+                  value={mobile}
+                  onChange={(e) => handleMobile(e)}
+                />
+              </MDBCol>{" "}
             </>
           )}
         </MDBRow>
       </form>
-      <DefaulterTable searchInput={inputValues} count={count} />
+      <DefaulterTable
+        searchInput={inputValues}
+        name={name}
+        mobile={mobile}
+        PAN={PAN}
+        aadhar={aadhar}
+        count={count}
+      />
     </div>
   );
 };

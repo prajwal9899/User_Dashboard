@@ -21,7 +21,7 @@ const ProtectedRoutes = ({ children }) => {
           }
         }
       );
-      console.log(res, 'Protected');
+      // console.log(res, 'Protected');
       if (res.data.success === true) {
         dispatch(setUser(res.data.data));
       } else {
@@ -47,7 +47,6 @@ const ProtectedRoutes = ({ children }) => {
           var noOfAccounts = item.length
           var loanAmount = 0
           var loanOutstandingBalance = 0
-          // console.log(item, "defaulters");
           for (let i = 0; i < item.length; i++) {
             loanAmount = Number(item[i].LoanAmount) + Number(loanAmount)
             loanOutstandingBalance = Number(item[i].LoanOutstandingBalance) + Number(loanOutstandingBalance)

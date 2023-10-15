@@ -53,6 +53,13 @@ export default {
           type: 'item',
           url: '/search',
           icon: icons['SearchIcon']
+        },
+        {
+          id: 'PDF',
+          title: 'PDF',
+          type: 'item',
+          url: '/pdf',
+          icon: icons['PDF']
         }
       ]
     }

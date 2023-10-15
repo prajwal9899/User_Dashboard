@@ -34,11 +34,6 @@ const NavItem = ({ item, level }) => {
     listItemProps = { component: 'a', href: item.url };
   }
 
-  console.log(user);
-  console.log(item);
-
-
-
   return (
     <ListItemButton
       disabled={user?.isSubscription !== "Activated" && item?.id !== "dashboard" ? true : false}
