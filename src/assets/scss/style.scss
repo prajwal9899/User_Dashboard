@@ -18,3 +18,15 @@
 .apexcharts-legend-marker {
   margin-right: 8px !important;
 }
+
+.subscription_details{
+  position: absolute;
+  bottom: 30px;
+  p{
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #242c3a;
+  }
+}
